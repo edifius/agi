@@ -293,11 +293,6 @@ func (a *AGI) Hangup() error {
 	return a.Command("HANGUP").Err()
 }
 
-// Logs a message to the Asterisk Console
-func (a *AGI) Verbose(msg string) error {
-	return a.Command("VERBOSE", msg, 1).Val()
-}
-
 // RecordOptions describes the options available when recording
 type RecordOptions struct {
 	// Format is the format of the audio file to record; defaults to "wav".
