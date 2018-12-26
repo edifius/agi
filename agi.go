@@ -407,17 +407,15 @@ func (a *AGI) StreamFile(name string, escapeDigits string, offset int) (digit st
 }
 
 // Verbose logs the given message to the verbose message system
-func (a *AGI) Verbose(msg string, level int) error {
+func (a *AGI) Verbose(msg string, level int) {
 	a.mu.Lock()
 	defer a.mu.Unlock()
 
 	cmdString := "VERBOSE \"" + msg + "\" 1" + "\n"
 	_, err := a.w.Write([]byte(cmdString))
 	if err != nil {
-		resp.Error = errors.Wrap(err, "failed to send command")
 		return
 	}
-	return a.Command("VERBOSE", msg, strconv.Itoa(level)).Err()
 }
 
 // WaitForDigit waits for a DTMF digit and returns what is received
